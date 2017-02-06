@@ -3,8 +3,11 @@
     <CLASSES>
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-runtime.jar!/" />
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-reflect.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/Discord4j-dev-2.7.0-g44abb56-111-shaded.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="https://jitpack.io/com/github/austinv11/Discord4j/2.7.0/javadoc/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-runtime-sources.jar!/" />
     </SOURCES>
