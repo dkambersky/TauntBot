@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import sx.blah.discord.api.ClientBuilder
 import sx.blah.discord.api.IDiscordClient
 
@@ -7,34 +6,34 @@ import sx.blah.discord.api.IDiscordClient
  */
 
 
-const val token = "Stuff!"
+val token = get("token")
+val client = login(token as String)
 
-class Bot(client: IDiscordClient) {
+
+
+
+
+fun main(args: Array<String>) {
+
+    println("Main running!")
+
+
 
 
 
 }
 
-var instance: Bot?= null
 
-fun main(args: Array<String>) {
-
-
-    println("lol")
-    val fac = YAMLFactory()
-    
+fun login(token:String):IDiscordClient{
     val builder = ClientBuilder()
     builder.withToken(token)
+
     try {
-
-
+        return builder.login()
     } catch (e: Exception){
+        println("Error occurred while logging in!")
         e.printStackTrace()
     }
 
-
-
-
+    return null!!
 }
-
-
