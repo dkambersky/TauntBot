@@ -7,7 +7,7 @@ import java.nio.file.Files
 /**
  * Created by David on 06/02/2017.
  */
-const val config_path = "./settings.yml"
+const val config_path = "./config.yml"
 
 
 var initialized = false
@@ -34,7 +34,7 @@ private fun load() {
 
     try {
 
-        println("hello")
+        println("helXalo")
         val parser = fac.createParser(Files.newInputStream(File(config_path).toPath()))
         println("hello2")
         val root:JsonNode= mapper.readTree(parser)

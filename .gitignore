@@ -53,3 +53,6 @@ out/*
 
 # Maven
 target/*
+
+# Config
+config.yml
