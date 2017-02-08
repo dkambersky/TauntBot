@@ -1,22 +1,26 @@
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.databind.node.TextNode
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import java.io.File
 import java.nio.file.Files
 
-/**
+/** Default IDEA comment
  * Created by David on 06/02/2017.
  */
 const val config_path = "./config.yml"
 
 
 var initialized = false
-var config = mutableMapOf<String, Any>()
+var config_tree:JsonNode?=null
 
 
 fun get(key: String): Any? {
     load()
-    return config[key]
+    val node = config_tree!!.path("config").path(key)
+
+    return node.asText()
 }
 
 
@@ -25,45 +29,49 @@ private fun load() {
     if (initialized)
         return
 
-
-    println("Loading properties!")
-
     val fac = YAMLFactory()
-    var mapper = ObjectMapper(fac)
-
+    val mapper = ObjectMapper(fac)
 
     try {
-
-        println("helXalo")
         val parser = fac.createParser(Files.newInputStream(File(config_path).toPath()))
-        println("hello2")
-        val root:JsonNode= mapper.readTree(parser)
-
-        for(node in root){
-
-
-            println("Parsing node $node.")
-        }
+        config_tree= mapper.readTree(parser)
     } catch (e: NoSuchFileException) {
-        println("Initializing config file!")
-        setDefaults()
-        save()
+        println("No config file found. Creating a default one.")
+        createConfig()
+
     }
 
 
 }
 
-
 private fun save() {
-    val gen = YAMLFactory().createGenerator(Files.newOutputStream(File(config_path).toPath()))
+
+ObjectMapper(YAMLFactory()).writeValue(File(config_path), config_tree)
+
 
 
 }
 
+private fun createConfig() {
+    setDefaults()
+    save()
+}
 
 private fun setDefaults() {
-    config.put("source-file", "source.txt")
-    config.put("api-token", "")
+
+    val mapper = ObjectMapper(YAMLFactory())
+
+    val tree: ObjectNode = mapper.createObjectNode()
+
+    val conf_node = mapper.createObjectNode()
+
+    conf_node.put("api-token", "")
+    conf_node.put("source-file", "sources.txt")
+
+    tree.set("config", conf_node)
+
+    config_tree = tree
+
 
 }
 

@@ -1,3 +1,4 @@
+import com.sun.javaws.exceptions.InvalidArgumentException
 import sx.blah.discord.api.ClientBuilder
 import sx.blah.discord.api.IDiscordClient
 
@@ -5,9 +6,7 @@ import sx.blah.discord.api.IDiscordClient
  * Created by David on 06/02/2017.
  */
 
-
-val token = get("token")
-val client = login(token as String)
+var client = login()
 
 
 
@@ -24,11 +23,19 @@ fun main(args: Array<String>) {
 }
 
 
-fun login(token:String):IDiscordClient{
+fun login():IDiscordClient{
+
     val builder = ClientBuilder()
+
+    val token = get("api-token") as String?
+    if(token == null || token.equals("")) {
+        throw Exception("Please specify an API token in config.yml!")
+    }
+
     builder.withToken(token)
 
     try {
+        println("Logging in with token: ${builder.token}")
         return builder.login()
     } catch (e: Exception){
         println("Error occurred while logging in!")
