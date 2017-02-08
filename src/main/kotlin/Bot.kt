@@ -1,34 +1,24 @@
-import com.sun.javaws.exceptions.InvalidArgumentException
 import sx.blah.discord.api.ClientBuilder
 import sx.blah.discord.api.IDiscordClient
 
 /**
  * Created by David on 06/02/2017.
+ * IDEA keeps complaining about the default comment.
  */
 
-var client = login()
-
-
-
-
+val client = login()
 
 fun main(args: Array<String>) {
-
-    println("Main running!")
-
-
-
-
-
+    client.dispatcher.registerListener(Listener())
 }
 
-
+@Suppress("UNREACHABLE_CODE")
 fun login():IDiscordClient{
 
     val builder = ClientBuilder()
 
     val token = get("api-token") as String?
-    if(token == null || token.equals("")) {
+    if(token == null || token == "") {
         throw Exception("Please specify an API token in config.yml!")
     }
 
@@ -40,7 +30,10 @@ fun login():IDiscordClient{
     } catch (e: Exception){
         println("Error occurred while logging in!")
         e.printStackTrace()
+
     }
 
+    /* IDEA complains whether this piece of unreachable
+        code is here or not. Oh well */
     return null!!
 }
