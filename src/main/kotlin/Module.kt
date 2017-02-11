@@ -9,28 +9,32 @@ import sx.blah.discord.handle.obj.Status
  * This would probably look nicer with the annotation approach,
  *  but hey, I like interfaces.
  */
-class Listener : IListener<Event> {
+abstract class Module : IListener<Event> {
 
-    var ready = false
+
 
     override fun handle(e: Event?) {
 
         /* Wait for ReadyEvent */
-        if(e is ReadyEvent) ready = true
+        if(e is ReadyEvent) handleReady()
         if (!ready) return
 
 
         /* Handle correct event type */
         when (e) {
-            is MessageReceivedEvent -> handleMsgRec(e)
-
+            is MessageReceivedEvent -> handleMessageReceived(e)
+            /* here be any more events we wanna handle */
         }
     }
 
 
 
-    fun handleMsgRec(e: MessageReceivedEvent){
-        client.changeStatus(Status.game(e.message.content))
+    open fun handleMessageReceived(e:    MessageReceivedEvent){
 
     }
+
+    open fun handleReady(){
+        ready = true
+    }
+
 }

@@ -28,27 +28,23 @@
                 <executions>
                     <execution>
                         <id>compile</id>
+                        <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>
                         </goals>
                         <configuration>
                             <sourceDirs>
-                                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                                <sourceDir>${project.basedir}/src/main/java</sourceDir>
+                                <source>src/main/java</source>
+                                <source>src/main/kotlin</source>
                             </sourceDirs>
                         </configuration>
                     </execution>
                     <execution>
                         <id>test-compile</id>
+                        <phase>test-compile</phase>
                         <goals>
                             <goal>test-compile</goal>
                         </goals>
-                        <configuration>
-                            <sourceDirs>
-                                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
-                                <sourceDir>${project.basedir}/src/test/java</sourceDir>
-                            </sourceDirs>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -165,6 +161,19 @@
             <artifactId>logback-classic</artifactId>
             <version>1.1.7</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test-junit</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mongo -->
+        <dependency>
+            <groupId>org.litote.kmongo</groupId>
+            <artifactId>kmongo</artifactId>
+            <version>3.3.5</version>
+        </dependency>
 
     </dependencies>
 
@@ -177,6 +186,8 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+
+
     </repositories>
 
 </project>

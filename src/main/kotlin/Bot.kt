@@ -1,3 +1,6 @@
+import io.get
+import modules.InitModule
+import modules.MooModule
 import sx.blah.discord.api.ClientBuilder
 import sx.blah.discord.api.IDiscordClient
 
@@ -9,7 +12,10 @@ import sx.blah.discord.api.IDiscordClient
 val client = login()
 
 fun main(args: Array<String>) {
-    client.dispatcher.registerListener(Listener())
+
+    client.dispatcher.registerListener(InitModule())
+    client.dispatcher.registerListener(MooModule())
+
 }
 
 @Suppress("UNREACHABLE_CODE")
