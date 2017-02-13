@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.IntNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.node.TextNode
 import io.db_tree
-import io.getDb
+import io.getConfBranch
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent
 import sx.blah.discord.handle.obj.IUser
 
@@ -23,22 +23,23 @@ class MooModule : Module() {
                     else -> ""
                 }
 
-        if(msg != "") e.message.channel.sendMessage(msg)
+        if (msg != "") e.message.channel.sendMessage(msg)
 
 
     }
 
-    private fun increaseRespect(author: IUser): IUser {
+    private fun
+            increaseRespect(author: IUser): IUser {
 
-
-
-        (db_tree!!.path("respect") as ObjectNode).set(author.id, IntNode((getDb("respect", author.id) as Int ) +1))
+        (getConfBranch("respect") as ObjectNode)
+                .set(author.id, IntNode((
+                        getConfBranch("respect", author.id).intValue()) + 1))
 
         return author
     }
 
-    fun getRespect(author: IUser): Int{
-     return getDb("respect", author.id) as Int
+    fun getRespect(author: IUser): Int {
+        return getConfBranch("respect", author.id).intValue()
     }
 
 }

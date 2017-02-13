@@ -18,11 +18,22 @@ var db_initialized = false
 var db_tree: JsonNode? = null
 
 
-fun getDb(key: String, key_inner: String): Any? {
+fun getConfBranch(key: String): Any? {
     load()
-    val node = db_tree!!.path(key).path(key_inner)
+    val node = db_tree!!.with(key)
 
     return node.asText()
+}
+
+
+/* Convenience method */
+fun getConfBranch(vararg keys: String): JsonNode {
+    var node = db_tree!!
+    for (key in keys) {
+        node = node.with(key)
+    }
+
+    return node
 }
 
 fun getNode(key: String, key_inner: String): JsonNode {
@@ -31,7 +42,6 @@ fun getNode(key: String, key_inner: String): JsonNode {
 
     return node
 }
-
 
 
 private fun load() {
