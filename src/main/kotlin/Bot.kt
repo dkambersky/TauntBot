@@ -13,25 +13,29 @@ import sx.blah.discord.api.IDiscordClient
 /**
  * Idea list:
  *
+ *
  * -- News etc
  * - TODO github notifications
  * - TODO rss feed
  * - TODO HN & reddit digests
  * - TODO monitoring - servers etc
  *
- *
  * -- Interactivity
- * - TODO fortune, respects etc (because we can)
+ * - DONE fortune, respects etc (because we can)
  * - TODO taunts & replies
  * - TODO economy, slots, rolls
- *
  *
  * -- Functionality
  * - TODO delete responses after set delay
  *
+ * -- Logistics
+ * - TODO save module settings into separate YAML nodes
+ * - TODO plain ol' user login
+ *
  * -- Large undertakings
  * - TODO musicbot
  * - TODO Fate RP integration (w/ dusanp/ServerFateSR)
+ *
  *
  */
 
