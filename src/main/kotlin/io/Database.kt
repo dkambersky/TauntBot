@@ -17,32 +17,35 @@ import java.nio.file.NoSuchFileException
 var db_initialized = false
 var db_tree: JsonNode? = null
 
-
-fun getConfBranch(key: String): Any? {
-    load()
-    val node = db_tree!!.with(key)
-
-    return node.asText()
-}
-
-
 /* Convenience method */
-fun getConfBranch(vararg keys: String): JsonNode {
-    var node = db_tree!!
+fun getConfBranch(vararg keys: String): Any {
+    load()
+    var node: JsonNode = db_tree!!
+
     for (key in keys) {
-        node = node.with(key)
+
+        val value = node.findValue(key)
+
+        if (value.isValueNode) return value
+        else node = node.with(key)
+
     }
 
     return node
 }
 
-fun getNode(key: String, key_inner: String): JsonNode {
+fun setConfBranch(value: JsonNode, vararg keys: String) {
     load()
-    val node = db_tree!!.path(key).path(key_inner)
+    var node = db_tree!!
 
-    return node
+    for (key in keys.take(keys.size - 1)) {
+        node = node.with(key)
+    }
+
+    (node as ObjectNode).set(keys.last(), value)
+    save()
+
 }
-
 
 private fun load() {
 

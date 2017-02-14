@@ -2,10 +2,8 @@ package modules
 
 import Module
 import com.fasterxml.jackson.databind.node.IntNode
-import com.fasterxml.jackson.databind.node.ObjectNode
-import com.fasterxml.jackson.databind.node.TextNode
-import io.db_tree
 import io.getConfBranch
+import io.setConfBranch
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent
 import sx.blah.discord.handle.obj.IUser
 
@@ -31,15 +29,15 @@ class MooModule : Module() {
     private fun
             increaseRespect(author: IUser): IUser {
 
-        (getConfBranch("respect") as ObjectNode)
-                .set(author.id, IntNode((
-                        getConfBranch("respect", author.id).intValue()) + 1))
+        val respectNode = IntNode((getConfBranch("respect", author.id) as IntNode).intValue() + 1)
+
+        setConfBranch(respectNode, "respect", author.id)
 
         return author
     }
 
     fun getRespect(author: IUser): Int {
-        return getConfBranch("respect", author.id).intValue()
+        return getConfBranch("respect", author.id) as Int
     }
 
 }
