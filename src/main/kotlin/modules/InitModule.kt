@@ -7,15 +7,24 @@ import sx.blah.discord.handle.obj.Status
 import java.lang.Thread.sleep
 
 /**
- * Created by david on 09.02.2017.
+ * Module which handles the loading of the bot
  */
 class InitModule : Module() {
 
     override fun handleReady() {
         super.handleReady()
         sleep(150)
+
         client.changeStatus(Status.game("with JVM"))
-        client.getChannelByID(get("master-channel-id") as String).sendMessage("MurderBot online!")
+
+        try {
+            val channelID = get("master-channel-id") as String?
+            client.getChannelByID(channelID).sendMessage("MurderBot online!")
+        } catch (e: Exception) {
+            println("Please specify master-channel-id for the bot to work properly.")
+        }
+
+
     }
 
 }

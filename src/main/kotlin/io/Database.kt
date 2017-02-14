@@ -18,7 +18,7 @@ var db_initialized = false
 var db_tree: JsonNode? = null
 
 /* Convenience method */
-fun getConfBranch(vararg keys: String): Any {
+fun getConfBranch(vararg keys: String): JsonNode {
     load()
     var node: JsonNode = db_tree!!
 
@@ -26,7 +26,9 @@ fun getConfBranch(vararg keys: String): Any {
 
         val value = node.findValue(key)
 
-        if (value.isValueNode) return value
+        if (value != null && value.isValueNode)
+            return value
+
         else node = node.with(key)
 
     }
