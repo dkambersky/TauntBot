@@ -21,16 +21,18 @@ import sx.blah.discord.api.IDiscordClient
  * - TODO monitoring - servers etc
  *
  * -- Interactivity
- * - DONE fortune, respects etc (because we can)
+ * + DONE fortune, respects etc (because we can)
  * - TODO taunts & replies
  * - TODO economy, slots, rolls
  *
  * -- Functionality
  * - TODO delete responses after set delay
+ * - TODO purge messages by channels / users / time!
  *
  * -- Logistics
  * - TODO save module settings into separate YAML nodes
- * - TODO plain ol' user login
+ * - TODO plain ol' user login (trivial)
+ * - TODO gradle > maven!
  *
  * -- Large undertakings
  * - TODO musicbot

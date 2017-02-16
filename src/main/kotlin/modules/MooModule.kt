@@ -14,12 +14,12 @@ import java.util.*
  * Quick little module mimicking moobot, to get a hang of the API
  *
  * Features:
- * -> f
- * -> respect
- * -> top
- * -> moo
- * -> harambe
- * -<  fortune - probably not coming, not on a *nix system
+ * + f
+ * + respect
+ * + top
+ * + moo
+ * + harambe w/ status
+ * . fortune - probably not coming, not on a *nix system :(
  */
 class MooModule : Module() {
 
@@ -27,18 +27,40 @@ class MooModule : Module() {
         val author = e.message.author
 
 
-        val msg =
+        /* Search for exact matches first */
+        var msg =
                 when (e.message.content.toLowerCase()) {
                     "f" -> "${increaseRespect(author)} pays their respects."
                     "respect" -> "$author has ${getRespect(author)} respect."
-                    "top" -> "here's a list of the biggest nolifers ```${getTopRespects()}```"
+                    "top" -> "here's a list of the biggest nolifers\n ```${getTopRespects()}```"
                     "moo" -> "```         (__)\r\n         (oo)\r\n   /------\\/\r\n  / |    ||\r\n *  /\\---/\\\r\n    ~~   ~~\r\n....\"Have you mooed today?\"...```"
-                    "harambe" -> harambe()
+                    "harambe-status" -> harambeStatus()
                     else -> ""
                 }
 
+
+        /* No exact match found, search for substrings */
+        if (msg == "") {
+            if (e.message.content.toLowerCase().contains("harambe")) msg = harambe()
+        }
+
         if (msg != "") e.message.channel.sendMessage(msg)
 
+    }
+
+    private fun harambeStatus(): String {
+
+        val streak = getConfBranch("harambe", "streak").intValue()
+        val last = getConfBranch("harambe", "last").longValue()
+
+
+        /* Time, in hours, since Harambe was last mentioned  */
+        val hours = (last - System.currentTimeMillis()) / 360000
+
+        return if (streak > 0)
+            "Current streak: $streak days. Harambe was last mentioned $hours hours ago."
+        else
+            "Harambe is forgotten :( Last mention was $hours hours ago."
     }
 
 
@@ -58,7 +80,6 @@ class MooModule : Module() {
         }
 
         if (hours > 24) {
-
             setConfBranch(IntNode(streak + 1), "harambe", "streak")
             return "Current Harambe daily streak: $streak"
         }
