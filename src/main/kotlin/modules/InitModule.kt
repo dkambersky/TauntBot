@@ -4,7 +4,6 @@ import Module
 import client
 import io.get
 import sx.blah.discord.handle.obj.Status
-import java.lang.Thread.sleep
 
 /**
  * Module which handles the loading of the bot
@@ -13,8 +12,6 @@ class InitModule : Module() {
 
     override fun handleReady() {
         super.handleReady()
-        sleep(150)
-
         client.changeStatus(Status.game("with JVM"))
 
         try {
