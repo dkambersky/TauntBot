@@ -54,5 +54,6 @@ out/*
 # Maven
 target/*
 
-# Config
+# Config & Data
 config.yml
+database.yml
