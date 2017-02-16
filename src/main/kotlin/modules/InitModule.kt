@@ -3,6 +3,7 @@ package modules
 import Module
 import client
 import io.get
+import sendMsg
 import sx.blah.discord.handle.obj.Status
 
 /**
@@ -16,7 +17,7 @@ class InitModule : Module() {
 
         try {
             val channelID = get("master-channel-id") as String?
-            client.getChannelByID(channelID).sendMessage("MurderBot online!")
+            sendMsg(client.getChannelByID(channelID), "MurderBot online!", 5000)
         } catch (e: Exception) {
             println("Please specify master-channel-id for the bot to work properly.")
         }

@@ -3,6 +3,12 @@ import modules.InitModule
 import modules.MooModule
 import sx.blah.discord.api.ClientBuilder
 import sx.blah.discord.api.IDiscordClient
+import sx.blah.discord.handle.obj.IChannel
+import sx.blah.discord.handle.obj.IMessage
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.TimeUnit
+
 
 /**
  * Created by David on 06/02/2017.
@@ -43,6 +49,10 @@ import sx.blah.discord.api.IDiscordClient
 
 val client = login()
 
+/* For timed tasks */
+val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
+
+
 fun main(args: Array<String>) {
 
     client.dispatcher.registerListener(InitModule())
@@ -51,12 +61,12 @@ fun main(args: Array<String>) {
 }
 
 @Suppress("UNREACHABLE_CODE")
-fun login():IDiscordClient{
+fun login(): IDiscordClient {
 
     val builder = ClientBuilder()
 
     val token = get("api-token") as String?
-    if(token == null || token == "") {
+    if (token == null || token == "") {
         throw Exception("Please specify an API token in config.yml!")
     }
 
@@ -65,7 +75,7 @@ fun login():IDiscordClient{
     try {
         println("Logging in with token: ${builder.token}")
         return builder.login()
-    } catch (e: Exception){
+    } catch (e: Exception) {
         println("Error occurred while logging in!")
         e.printStackTrace()
 
@@ -74,4 +84,16 @@ fun login():IDiscordClient{
     /* IDEA complains whether this piece of unreachable
         code is here or not. Oh well */
     return null!!
+}
+
+fun sendMsg(channel: IChannel, message: String): IMessage {
+    return channel.sendMessage((message))
+}
+
+fun sendMsg(channel: IChannel, message: String, timeout: Long): IMessage {
+    val msg = sendMsg(channel, message)
+    executor.schedule({ msg.delete() }, timeout, TimeUnit.MILLISECONDS)
+
+    return msg
+
 }
