@@ -17,6 +17,7 @@ class TournamentModule : Module() {
 
     override fun handleMessageReceived(e: MessageReceivedEvent) {
         e.message.channel.sendMessage("tourneys: " + tourneys)
+
     }
 
 }

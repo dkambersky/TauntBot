@@ -104,6 +104,6 @@
     <orderEntry type="library" name="Maven: org.litote.kmongo:kmongo-shared:3.3.5" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: de.undercouch:bson4jackson:2.7.0" level="project" />
-    <orderEntry type="library" name="com.exsoloscript.challonge:challonge-java:1.0" level="project" />
+    <orderEntry type="library" name="com.exsoloscript.challonge:challonge-java:1.0.1" level="project" />
   </component>
 </module>
