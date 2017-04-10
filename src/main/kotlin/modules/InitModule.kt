@@ -7,7 +7,7 @@ import sendMsg
 import sx.blah.discord.handle.obj.Status
 
 /**
- * Module which handles the loading of the bot
+ * Module which handles the initial triggers for the bot
  */
 class InitModule : Module() {
 
