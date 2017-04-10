@@ -22,10 +22,14 @@
               </K2JSCompilerArguments>
             </option>
             <option name="k2jvmCompilerArguments">
-              <K2JVMCompilerArguments />
+              <K2JVMCompilerArguments>
+                <option name="jvmTarget" value="1.6" />
+              </K2JVMCompilerArguments>
             </option>
             <option name="_commonCompilerArguments">
               <DummyImpl>
+                <option name="languageVersion" value="1.0" />
+                <option name="apiVersion" value="1.0" />
                 <option name="pluginClasspaths">
                   <array />
                 </option>
@@ -48,7 +52,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">

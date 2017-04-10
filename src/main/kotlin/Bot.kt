@@ -55,10 +55,20 @@ val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecu
 
 
 fun main(args: Array<String>) {
+    val a = AsciiDrawer()
 
-    client.dispatcher.registerListener(InitModule())
+    a.drawTextLine("asdf", 3, 7)
+
+    a.drawTextLine("xx", 0, 0)
+
+    a.drawBox(10, 10,5,5)
+    a.drawBox(0,3,3,5)
+    println(a.toString())
+
+
+    /*client.dispatcher.registerListener(InitModule())
     client.dispatcher.registerListener(MooModule())
-    client.dispatcher.registerListener(TournamentModule())
+    client.dispatcher.registerListener(TournamentModule())*/
 
 }
 
