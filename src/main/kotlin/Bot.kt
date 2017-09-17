@@ -1,7 +1,4 @@
 import io.get
-import modules.InitModule
-import modules.MooModule
-import modules.TournamentModule
 import sx.blah.discord.api.ClientBuilder
 import sx.blah.discord.api.IDiscordClient
 import sx.blah.discord.handle.obj.IChannel
@@ -20,6 +17,8 @@ import java.util.concurrent.TimeUnit
 /**
  * Idea list:
  *
+ *
+ * - TODO Module - roles!
  *
  * -- News etc
  * - TODO github notifications

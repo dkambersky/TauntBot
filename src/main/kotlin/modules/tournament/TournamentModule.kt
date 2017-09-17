@@ -1,4 +1,4 @@
-package modules
+package modules.tournament
 
 import Module
 import com.exsoloscript.challonge.Challonge
@@ -8,7 +8,8 @@ import com.fasterxml.jackson.databind.node.TextNode
 import io.getConfBranch
 import io.setConfBranch
 import sx.blah.discord.api.internal.json.objects.EmbedObject
-import sx.blah.discord.handle.impl.events.MessageReceivedEvent
+import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent
+
 import sx.blah.discord.handle.impl.obj.Embed
 import sx.blah.discord.handle.obj.IMessage
 import java.awt.Color
@@ -35,7 +36,7 @@ class TournamentModule : Module() {
             when (tokens[0]) {
                 "create" -> createTournament(tokens)
                 "match" -> updateMatch(tokens)
-                "register" -> registerName(tokens[1], e.message.author.id)
+                "register" -> registerName(tokens[1], e.message.author.longID)
                 "associate" -> setCurrentTournament(tokens[1])
                 "tournament" -> showTourney()
             }
@@ -53,7 +54,7 @@ class TournamentModule : Module() {
         val embed = EmbedObject(Embed("Tournament Information", "rich", "${tournament.name()}", tournament.fullChallongeUrl(), "", null, LocalDateTime.now(), Color(253, 55, 29), Embed.EmbedFooter("ChallongeModule @ KotlinBot", "http://i.imgur.com/3gxvXqe.png"), "http://i.imgur.com/3gxvXqe.png", "", Embed.EmbedAuthor("Davefin", "", ""), null))
         lastMsg!!.channel.sendMessage(getMatchups())
         lastMsg!!.channel.sendMessage("", embed, false)
-        //getBracket()
+        //modules.tournament.getBracket()
     }
 
     private fun getMatchups(): String {
@@ -98,7 +99,7 @@ class TournamentModule : Module() {
     /**
      * Associates a Discord account with a Challonge account
      */
-    private fun registerName(s: String, id: String?) {
+    private fun registerName(s: String, id: Long) {
         //TODO register names
     }
 

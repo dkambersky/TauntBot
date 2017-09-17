@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.node.IntNode
 import com.fasterxml.jackson.databind.node.LongNode
 import io.getConfBranch
 import io.setConfBranch
-import sx.blah.discord.handle.impl.events.MessageReceivedEvent
+import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent
 import sx.blah.discord.handle.obj.IUser
 import java.util.*
 
@@ -19,7 +19,7 @@ import java.util.*
  * + top
  * + moo
  * + harambe w/ status
- * . fortune - probably not coming, not on a *nix system :(
+ * . fortune - probably not coming, not without a *nix system :(
  */
 class MooModule : Module() {
 
@@ -93,15 +93,15 @@ class MooModule : Module() {
 
         var respect = 1
 
-        val branch = getConfBranch("respect", author.id)
+        val branch = getConfBranch("respect", author.longID.toString())
         if (branch is IntNode) respect = branch.intValue() + 1
 
-        setConfBranch(IntNode(respect), "respect", author.id)
+        setConfBranch(IntNode(respect), "respect", author.longID.toString())
 
         return author
     }
 
-    private fun getRespect(author: IUser): Int = getConfBranch("respect", author.id).intValue()
+    private fun getRespect(author: IUser): Int = getConfBranch("respect", author.longID.toString()).intValue()
 
     private fun getTopRespects(): String = /* Oh the laziness */
             getConfBranch("respect").fields()
@@ -110,7 +110,7 @@ class MooModule : Module() {
                     .toList()
                     .reversed()
                     .fold("") { str, ele ->
-                        "$str\n${client.getUserByID(ele.key).name}: ${ele.value}"
+                        "$str\n${client.getUserByID(ele.key.toLong()).name}: ${ele.value}"
                     }
 
 

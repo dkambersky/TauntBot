@@ -1,8 +1,8 @@
 import sx.blah.discord.api.events.Event
 import sx.blah.discord.api.events.IListener
-import sx.blah.discord.handle.impl.events.MessageReceivedEvent
 import sx.blah.discord.handle.impl.events.ReadyEvent
-import sx.blah.discord.handle.obj.Status
+import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent
+
 
 /**
  * Main listener class.
@@ -29,7 +29,7 @@ abstract class Module : IListener<Event> {
 
 
 
-    open fun handleMessageReceived(e:    MessageReceivedEvent){
+    open fun handleMessageReceived(e: MessageReceivedEvent){
 
     }
 

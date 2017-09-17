@@ -50,6 +50,9 @@ Temporary Items
 .idea/workspace.xml
 .idea/tasks.xml
 out/*
+.idea/dictionaries
+.idea/libraries
+lib/
 
 # Maven
 target/*

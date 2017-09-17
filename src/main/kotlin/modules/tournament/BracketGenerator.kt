@@ -1,3 +1,5 @@
+package modules.tournament
+
 import com.exsoloscript.challonge.model.Tournament
 
 /**
